@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { useSelector, useDispatch } from 'react-redux';
 import App from './App.jsx'
 import './index.css'
 
@@ -12,14 +13,16 @@ import { Provider } from 'react-redux'
 /**
  * Importing reducers
  */
-import testReducer from './reducers/testReducer.js'
+import taskListReducer from './reducers/taskListReducer.js'
 
 /**
  * Creating the store w/reducers
  */
 const store = configureStore({
   reducer: {
-    test: testReducer
+    taskList: taskListReducer,
+    
+
   }
 })
 
