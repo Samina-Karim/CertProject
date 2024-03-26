@@ -20,11 +20,13 @@ import taskListReducer from './reducers/taskListReducer.js'
  */
 const store = configureStore({
   reducer: {
-    taskList: taskListReducer,
+    taskLists: taskListReducer,
     
 
   }
 })
+
+console.log("Store is ", store.getState());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

@@ -404,10 +404,22 @@ const taskListSlice = createSlice({
     updateTaskList(state,action) {
       console.log(action);
       return state;
+    },
+    createTask(state,action) {
+      console.log(action);
+      return state;
+    },
+    deleteTask(state,action) {
+      console.log(action);
+      return state;
+    },
+    updateTask(state,action) {
+      console.log(action);
+      return state;
     }
     
   }
 })
 
-export const { createTaskList, deleteTaskList, updateTaskList } = taskListSlice.actions;
+export const { createTaskList, deleteTaskList, updateTaskList, createTask, deleteTask, updateTask } = taskListSlice.actions;
 export default taskListSlice.reducer;
