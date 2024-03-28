@@ -97,12 +97,14 @@ const TaskList = ({
 
   const getPriorityStyle = (priority) => {
     switch (priority) {
+      case "Urgent":
+        return { backgroundColor: "	#f8b7cb" };
       case "High":
-        return { color: "red" };
+        return { backgroundColor: "#ffc14a" }; //#ffa6c1
       case "Medium":
-        return { color: "orange" };
+        return { backgroundColor: "#feff9c" };
       case "Low":
-        return { color: "green" };
+        return { backgroundColor: "#cdfc93" };
       default:
         return {};
     }

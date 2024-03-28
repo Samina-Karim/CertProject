@@ -32,6 +32,7 @@ const Task = ({ task, subTask, updateTask, enableEditingTask }) => {
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
+          <option value="Urgent">Urgent</option>
         </select>
         <select
           value={subTask.status}

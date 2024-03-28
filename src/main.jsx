@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { useSelector, useDispatch } from 'react-redux';
 import App from './App.jsx'
+import { BrowserRouter } from 'react-router-dom';
 import './index.css'
 
 /**
@@ -30,6 +30,8 @@ console.log("Store is ", store.getState());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+       <App />
+    </BrowserRouter>
   </Provider>,
 )

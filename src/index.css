@@ -18,7 +18,36 @@
   height: 2.4em;
 }
 
+.login-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Sets the size ratio between columns */
+  gap: 10px; /* Adds space between columns */
+}
+
+.login-button{
+
+
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: #007bff; /* Initial background color */
+  color: white; /* Initial text color */
+  border: none; /* No border */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  border-radius: 10px; /* Rounded corners */
+
   
+}
+
+
+.login-button:hover {
+  background-color: #03ac1c; 
+}
+
+.login-message{
+  margin-top:30%;
+  font-size: 30px;
+  text-align: center;
+}
 .container {
     height: 100vh; /* Use the full height of the viewport */
     width: 100vw;
@@ -121,7 +150,8 @@
     align-items: center;
     justify-content: center;
      border: 1px solid #ccc;
-    background-color:#f0f0f0 ;
+     color: black;
+    /* background-color: #f0f0f0 ; */
     padding: 10px;
     box-sizing: border-box;
     border-radius: 10px;

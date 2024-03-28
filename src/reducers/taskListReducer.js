@@ -13,7 +13,7 @@ const initialState = [
         {
           id: 1,
           name: "Rmnbhfh",
-          priority: "High",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
@@ -41,7 +41,7 @@ const initialState = [
         {
           id: 5,
           name: "Laundry",
-          priority: "High",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
@@ -90,14 +90,14 @@ const initialState = [
         {
           id: 12,
           name: "Teaching ",
-          priority: "Low",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
         {
           id: 13,
           name: "Studying",
-          priority: "High",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
@@ -167,7 +167,7 @@ const initialState = [
         {
           id: 23,
           name: "Teaching ",
-          priority: "Low",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
@@ -201,7 +201,7 @@ const initialState = [
         {
           id: 2,
           name: "Project 2",
-          priority: "High",
+          priority: "Urgent",
           status: "Complete",
           dueDate: "10/01/24",
         },
