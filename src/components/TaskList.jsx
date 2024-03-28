@@ -3,17 +3,98 @@ import { faTimes, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-datepicker/dist/react-datepicker.css";
 import Task from "./Task.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteTaskAction,
+  updateTaskAction,
+} from "../reducers/taskListReducer.js";
 
 const TaskList = ({
   task,
   changeSelectedTask,
   selectedTask,
-  createTask,
-  deleteTask,
-  updateTask,
+  // createTask,
+  // deleteTask,
+  // updateTask,
   enableEditingTask,
   isEditingTask,
 }) => {
+  /*--------- REDUX ----------*/
+  const dispatch = useDispatch();
+  const taskLists = useSelector((store) => store.taskLists);
+
+  
+
+  /****** DELETE TASK*******/
+  const deleteTask = (e, taskListId, taskId) => {
+    e.preventDefault();
+
+    console.log("TaskList ID ", taskListId);
+    console.log("Sub Task List ID ", taskId);
+
+    /*---------- REDUX ---------*/
+    dispatch(deleteTaskAction({ taskListId: taskListId, taskId: taskId }));
+
+    /*---------- NON REDUX ---------*/
+    // setTaskLists((prevTaskLists) => {
+    //   // Find the taskList with the given id
+    //   const updatedTaskLists = prevTaskLists.map((taskList) => {
+    //     if (taskList.id === taskListId) {
+    //       // Filter out the subTaskList with the given id
+    //       const updatedSubTaskLists = taskList.subTaskLists.filter(
+    //         (subTaskList) => subTaskList.id !== taskId
+    //       );
+    //       // Return the taskList with the updated subTaskLists
+    //       return { ...taskList, subTaskLists: updatedSubTaskLists };
+    //     }
+    //     return taskList;
+    //   });
+    //   return updatedTaskLists;
+    // });
+  };
+
+  /****** UPDATE TASK*******/
+
+  const updateTask = (e, taskListId, taskId, field, newValue) => {
+    if (e) e.preventDefault();
+    console.log("Updating task");
+    console.log("E ", e);
+    enableEditingTask(true);
+
+    /*---------- REDUX ---------*/
+    dispatch(
+      updateTaskAction({
+        taskListId: taskListId,
+        taskId: taskId,
+        field: field,
+        newValue: newValue,
+      })
+    );
+
+    /*---------- NON REDUX ---------*/
+    // setTaskLists((prevTaskLists) =>
+    //   prevTaskLists.map((taskList) => {
+    //     // Check if this is the task list we want to update
+    //     if (taskList.id === taskListId) {
+    //       // Map over the subtasks to find the one we want to update
+    //       const updatedSubTaskLists = taskList.subTaskLists.map((subTask) => {
+    //         if (subTask.id === taskId) {
+    //           // Update the specific field of the subtask
+    //           return { ...subTask, [field]: newValue };
+    //         }
+    //         return subTask;
+    //       });
+
+    //       // Return the taskList with the updated subTaskLists
+    //       return { ...taskList, subTaskLists: updatedSubTaskLists };
+    //     }
+    //     return taskList;
+    //   })
+    // );
+
+    console.log("Updated TaskLists", taskLists);
+  };
+
   const getPriorityStyle = (priority) => {
     switch (priority) {
       case "High":

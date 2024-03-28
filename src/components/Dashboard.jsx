@@ -11,19 +11,77 @@ import {
   faTrashCan,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createTaskListAction,
+  deleteTaskListAction,
+  updateTaskListAction,
+} from "../reducers/taskListReducer";
 
 const Dashboard = ({
-  taskLists,
+  // taskLists,
   changeSelectedTaskList,
   selectedTaskList,
-  createTaskList,
-  deleteTaskList,
-  updateTaskList,
+  // createTaskList,
+  // deleteTaskList,
+  // updateTaskList,
   enableEditingTaskList,
   isEditingTaskList,
   newTask,
   newTaskStatus,
 }) => {
+  /*--------- REDUX ----------*/
+  const dispatch = useDispatch();
+  const taskLists = useSelector((store) => store.taskLists);
+
+  /****** CREATE TASKLIST*******/
+  const createTaskList = (newTaskList) => {
+    console.log("Creating task");
+    /*---------- NON REDUX ---------*/
+    // setTaskLists([...taskLists, newTaskList]);
+    /*----------  REDUX --------------*/
+    dispatch(createTaskListAction(newTaskList));
+
+    newTaskStatus(false);
+  };
+
+  /****** DELETE TASKLIST*******/
+  const deleteTaskList = (e, taskId) => {
+    e.preventDefault();
+    console.log("Deleting task");
+    /*----------  REDUX --------------*/
+    dispatch(deleteTaskListAction(taskId));
+    /*---------- NON REDUX ---------*/
+    // const newTaskLists = taskLists.filter((task) => task.id !== taskId);
+    // setTaskLists(newTaskLists);
+  };
+
+  /****** UPDATE TASKLIST*******/
+  const updateTaskList = (e, taskId) => {
+    console.log("E ", e);
+    console.log("In Update Task List");
+    enableEditingTaskList("true");
+
+    const newName = e.target.value;
+
+    console.log(newName);
+    /*----------   REDUX ---------*/
+    dispatch(updateTaskListAction({ taskId: taskId, newName: newName }));
+
+    /*---------- NON REDUX ---------*/
+    // setTaskLists((prevTaskLists) => {
+    //   return prevTaskLists.map((taskList) => {
+    //     if (taskList.id === taskId) {
+    //       // Return a new taskList object with the updated name
+    //       return { ...taskList, name: newName };
+    //     }
+    //     return taskList;
+    //   });
+    // });
+
+    console.log("Updated TaskLists", taskLists);
+  };
+
   return (
     <div>
       <ul>
