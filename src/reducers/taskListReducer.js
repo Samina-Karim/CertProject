@@ -393,33 +393,88 @@ const taskListSlice = createSlice({
   name: 'taskLists',
   initialState,
   reducers: {
-    createTaskList(state,action) {
-      console.log(action);
-      return state;
+    // getTaskListAction(state,action) {
+    //   const { selectedTaskList} = action.payload;
+    //   return state.find((item) => item.id === selectedTaskList);
+     
+    // },
+    // getTaskNameAction(state,action) {
+    //   const { selectedTaskList} = action.payload;
+    //   const task = state.find((item) => item.id === selectedTaskList);
+    //   if (task) {
+    //     console.log("Selected Task Name", task);
+    //     return task.name;
+    //   } else return;
+    // },
+    createTaskListAction(state,action) {
+      return state.concat(action.payload)
     },
-    deleteTaskList(state,action) {
-      console.log(action);
-      return state;
+    deleteTaskListAction(state,action) {
+      const id = action.payload
+      return state.filter(taskList => taskList.id !== id)
     },
-    updateTaskList(state,action) {
-      console.log(action);
-      return state;
+    updateTaskListAction(state, action) {
+      const { taskId, newName } = action.payload;
+      return state.map(taskList => {
+        if (taskList.id === taskId) {
+          return { ...taskList, name: newName };
+        }
+        return taskList;
+      });
     },
-    createTask(state,action) {
-      console.log(action);
-      return state;
+    createTaskAction(state,action) {
+      const { selectedTaskList,newTask} = action.payload;
+      return state.map((taskList) => {
+        if (taskList.id === selectedTaskList) {
+          console.log("In Create - TaskListID", taskList.id);
+          // Aleem asked to use concat to add the new task to the subTaskLists
+          return { ...taskList, subTaskLists: taskList.subTaskLists.concat(newTask) };
+          // Another method is as follows:
+          // return {...taskList,subTaskLists: [...taskList.subTaskLists, newTask]};
+        }
+        return taskList; // Return unmodified taskList if not the selected one
+      })
     },
-    deleteTask(state,action) {
-      console.log(action);
-      return state;
+
+    deleteTaskAction(state,action) {
+      const { taskListId,taskId} = action.payload;
+      return state.map((taskList) => {
+        if (taskList.id === taskListId) {
+          // Filter out the subTaskList with the given id
+          const updatedSubTaskLists = taskList.subTaskLists.filter(
+            (subTaskList) => subTaskList.id !== taskId
+          );
+          // Return the taskList with the updated subTaskLists
+          return { ...taskList, subTaskLists: updatedSubTaskLists };
+        }
+        return taskList;
+      });
+      return updatedTaskLists;
     },
-    updateTask(state,action) {
-      console.log(action);
-      return state;
+
+    updateTaskAction(state,action) {
+      const {taskListId, taskId, field, newValue}= action.payload;
+      return state.map((taskList) => {
+        // Check if this is the task list we want to update
+        if (taskList.id === taskListId) {
+          // Map over the subtasks to find the one we want to update
+          const updatedSubTaskLists = taskList.subTaskLists.map((subTask) => {
+            if (subTask.id === taskId) {
+              // Update the specific field of the subtask
+              return { ...subTask, [field]: newValue };
+            }
+            return subTask;
+          });
+
+          // Return the taskList with the updated subTaskLists
+          return { ...taskList, subTaskLists: updatedSubTaskLists };
+        }
+        return taskList;
+      });
     }
     
   }
 })
 
-export const { createTaskList, deleteTaskList, updateTaskList, createTask, deleteTask, updateTask } = taskListSlice.actions;
+export const { createTaskListAction, deleteTaskListAction, updateTaskListAction, createTaskAction, deleteTaskAction, updateTaskAction } = taskListSlice.actions;
 export default taskListSlice.reducer;
