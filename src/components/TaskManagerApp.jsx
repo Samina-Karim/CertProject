@@ -25,7 +25,7 @@ import {createTaskAction} from "../reducers/taskListReducer.js";
 import { useNavigate } from 'react-router-dom';
 
 const TaskManagerApp = () => {
-  
+
   let navigate = useNavigate();
   /*--------- REDUX ----------*/
   const dispatch = useDispatch();
@@ -537,6 +537,7 @@ const createTask = (e) => {
   return (
     <>
       <div className="container">
+        
         <div>
           <h1 className="main-title">TASK MANAGER</h1>
         </div>
